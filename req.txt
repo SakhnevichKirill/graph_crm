@@ -1,0 +1,7 @@
+rdflib
+rdflib-jsonld
+python-dotenv
+sqlalchemy
+requests
+pandas
+pykeen

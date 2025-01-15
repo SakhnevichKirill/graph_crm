@@ -1,0 +1,9 @@
+.env
+elements_timeline.db
+app/__pycache__/
+.vscode/
+catalog-v001.xml
+sales.owl
+sales_v3.owl
+sales_v2.owl
+crm_graph.rdf

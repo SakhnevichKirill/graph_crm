@@ -1,0 +1,1669 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.example.org/crm_detailed_ontology#"
+     xml:base="http://www.example.org/crm_detailed_ontology"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about="http://www.example.org/crm_detailed_ontology">
+        <owl:versionInfo>3.3</owl:versionInfo>
+        <rdfs:comment>Ontology for CRM system reflecting Accounts, Pipelines, Leads, Statuses, Timelines, and Changes</rdfs:comment>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#belongsToAccount -->
+
+    <owl:AnnotationProperty rdf:about="http://www.example.org/crm_detailed_ontology#belongsToAccount"/>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#belongsToObjectType -->
+
+    <owl:AnnotationProperty rdf:about="http://www.example.org/crm_detailed_ontology#belongsToObjectType"/>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasContact -->
+
+    <owl:AnnotationProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasContact"/>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasEmbeddedElement -->
+
+    <owl:AnnotationProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasEmbeddedElement"/>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasEmbeddedTimeline -->
+
+    <owl:AnnotationProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasEmbeddedTimeline"/>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasLead -->
+
+    <owl:AnnotationProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasLead"/>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasPipeline -->
+
+    <owl:AnnotationProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasPipeline"/>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasStatus -->
+
+    <rdf:Description rdf:about="http://www.example.org/crm_detailed_ontology#hasStatus">
+        <rdfs:comment>Воронка содержит несколько статусов (многие-ко-многим).</rdfs:comment>
+        <rdfs:comment>Аккаунт связан с одним или несколькими статусами (многие-ко-многим).</rdfs:comment>
+        <rdfs:comment>Лид имеет текущий статус.</rdfs:comment>
+        <rdfs:comment>Статус элемента Item внутри класса ParamsClass</rdfs:comment>
+    </rdf:Description>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasTimeline -->
+
+    <owl:AnnotationProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasTimeline"/>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#isContactOfLead -->
+
+    <owl:AnnotationProperty rdf:about="http://www.example.org/crm_detailed_ontology#isContactOfLead"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#belongFromContactToObjectType -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#belongFromContactToObjectType">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>Contact имеет только один ObjectType.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Contact"/>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#ObjectType"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#belongToClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#belongFromElementsTimelineEmbeddedToAccount -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#belongFromElementsTimelineEmbeddedToAccount">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>Вложенный элемент принадлежит одному аккаунту (функциональное свойство).</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#Account"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ElementsTimelineEmbedded"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#belongToClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#belongFromElementsTimelineEmbeddedToElementsTimeline -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#belongFromElementsTimelineEmbeddedToElementsTimeline">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>Объект со вложенными элемнтами имеет одну временную шкалу.</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#ElementsTimeline"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ElementsTimelineEmbedded"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#belongToClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#belongFromElementsTimelineLinksToElementsTimeline -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#belongFromElementsTimelineLinksToElementsTimeline">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>Временная шкала имеет один объект ссылок (функциональное свойство).</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#ElementsTimeline"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ElementsTimelineLinks"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#belongToClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#belongFromElementsTimelineToElementsTimelineEmbedded -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#belongFromElementsTimelineToElementsTimelineEmbedded">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>Временная шкала имеет один объект со вложенными элементами (функциональное свойство).</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ElementsTimeline"/>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#ElementsTimelineEmbedded"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#belongToClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#belongFromItemToLead -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#belongFromItemToLead">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>Item имеет только один Lead.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#belongToClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#belongFromItemToObjectType -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#belongFromItemToObjectType">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>Item имеет только один ObjectType.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#ObjectType"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#belongToClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#belongFromItemToParamsClass -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#belongFromItemToParamsClass">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>Item имеет только один ParamsClass.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#belongToClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#belongFromLeadToLossReason -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#belongFromLeadToLossReason">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>Lead имеет только один LossReason.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#LossReason"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#belongToClass"/>
+        <owl:inverseOf rdf:resource="http://www.example.org/crm_detailed_ontology#hasLeadFromLossReason"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#belongFromLeadToObjectType -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#belongFromLeadToObjectType">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>Lead имеет только один ObjectType.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#ObjectType"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#belongToClass"/>
+        <owl:inverseOf rdf:resource="http://www.example.org/crm_detailed_ontology#hasLeadFromObjectType"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#belongFromLeadToPipeline -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#belongFromLeadToPipeline">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>Lead принадлежит одному Pipeline.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#Pipeline"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#belongToClass"/>
+        <owl:inverseOf rdf:resource="http://www.example.org/crm_detailed_ontology#hasLeadFromPipeline"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#belongFromLeadToStatus -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#belongFromLeadToStatus">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>Lead имеет только один Status.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#Status"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#belongToClass"/>
+        <owl:inverseOf rdf:resource="http://www.example.org/crm_detailed_ontology#hasLeadFromStatus"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#belongFromParamsClassToLead -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#belongFromParamsClassToLead">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>ParamsClass имеет только один Lead.</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#belongToClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#belongFromParamsClassToLossReason -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#belongFromParamsClassToLossReason">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>ParamsClass имеет только один LossReason.</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#LossReason"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#belongToClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#belongFromParamsClassToNewPipeline -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#belongFromParamsClassToNewPipeline">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>У лида один новый пайплайн.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#Pipeline"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#belongToClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#belongFromParamsClassToNewStatus -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#belongFromParamsClassToNewStatus">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>У лида один новый статус.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#Status"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#belongToClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#belongFromTasksResultToObjectType -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#belongFromTasksResultToObjectType">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>TasksResult имеет только один ObjectType.</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#ObjectType"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#TasksResult"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#belongToClass"/>
+    </owl:ObjectProperty>
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#belongFromParamsClassToObjectType -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#belongFromParamsClassToObjectType">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>ParamsClass имеет только один ObjectType.</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#ObjectType"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#belongToClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#belongFromParamsClassToOldPipeline -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#belongFromParamsClassToOldPipeline">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>У лида один старый пайплайн.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#Pipeline"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#belongToClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#belongFromParamsClassToOldStatus -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#belongFromParamsClassToOldStatus">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>У лида один старый статус.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#Status"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#belongToClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#belongFromParamsClassToPipeline -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#belongFromParamsClassToPipeline">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>ParamsClass имеет только один Pipeline.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#Pipeline"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#belongToClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#belongFromParamsClassToStatus -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#belongFromParamsClassToStatus">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>ParamsClass имеет только один Status.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#Status"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#belongToClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#belongToClass -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#belongToClass">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>Общее свойство для уникальных связей.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#belongsFromElementsTimelineToElementsTimelineLinks -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#belongsFromElementsTimelineToElementsTimelineLinks">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>Объект ссылок принадлежит временной шкале (один-ко-многим).</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ElementsTimeline"/>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#ElementsTimelineLinks"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#belongToClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasAccount -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasAccount">
+        <rdfs:comment>Статус связан с одним или несколькими аккаунтами (многие-ко-многим).</rdfs:comment>
+        <rdfs:comment>Воронка связана с одним или несколькими аккаунтами (многие-ко-многим).</rdfs:comment>
+        <rdfs:comment>Причина потери связана с одним или несколькими аккаунтами (многие-ко-многим).</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#Account"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#LossReason"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Pipeline"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Status"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#hasClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasClass -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasClass">
+        <rdfs:comment>Общее свойство для не уникальных связей.</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasCustomField -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasCustomFieldFromLead">
+        <rdfs:comment>Lead связан с множеством CustomField (многие-ко-многим).</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#CustomField"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#hasClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasFilterPreset -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasFilterPresetFromLead">
+        <rdfs:comment>Lead связан с множеством FilterPreset (многие-ко-многим).</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#FilterPreset"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#hasClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasItem -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasItemFromLead">
+        <rdfs:comment>Lead имеет множество Item (один-ко-многим).</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#hasClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasLeadFromCustomField -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasLeadFromCustomField">
+        <rdfs:comment>CustomField связан с множеством Lead (многие-ко-многим).</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#CustomField"/>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#hasClass"/>
+        <owl:inverseOf rdf:resource="http://www.example.org/crm_detailed_ontology#hasCustomFieldFromLead"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasLeadFromFilterPreset -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasLeadFromFilterPreset">
+        <rdfs:comment>FilterPreset связан с множеством Lead (многие-ко-многим).</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#FilterPreset"/>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#hasClass"/>
+        <owl:inverseOf rdf:resource="http://www.example.org/crm_detailed_ontology#hasFilterPresetFromLead"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasLeadFromLossReason -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasLeadFromLossReason">
+        <rdfs:comment>LossReason имеет множество Lead (один-ко-многим).</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#LossReason"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#hasClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasLeadFromObjectType -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasLeadFromObjectType">
+        <rdfs:comment>ObjectType имеет множество Lead (один-ко-многим).</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ObjectType"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#hasClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasLeadFromPipeline -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasLeadFromPipeline">
+        <rdfs:comment>Pipeline имеет множество Lead (один-ко-многим).</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Pipeline"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#hasClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasLeadFromStatus -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasLeadFromStatus">
+        <rdfs:comment>Status имеет множество Lead (один-ко-многим).</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Status"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#hasClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasLeadFromTaskResult -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasLeadFromTaskResult">
+        <rdfs:comment>TaskResult связан с множеством Lead (многие-ко-многим).</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#TaskResult"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#hasClass"/>
+        <owl:inverseOf rdf:resource="http://www.example.org/crm_detailed_ontology#hasTaskResultFromLead"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasLeadFromTypeElement -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasLeadFromTypeElement">
+        <rdfs:comment>TypeElement связан с множеством Lead (многие-ко-многим).</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#TypeElement"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#hasClass"/>
+        <owl:inverseOf rdf:resource="http://www.example.org/crm_detailed_ontology#hasTypeElementFromLead"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasParamsClass -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasParamsClassFromLead">
+        <rdfs:comment>Lead имеет множество ParamsClass (один-ко-многим).</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#hasClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasTaskResult -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasTaskResultFromLead">
+        <rdfs:comment>Lead связан с множеством TaskResult (многие-ко-многим).</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#TaskResult"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#hasClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasTypeElement -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasTypeElementFromLead">
+        <rdfs:comment>Lead связан с множеством TypeElement (многие-ко-многим).</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#TypeElement"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#hasClass"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#isConnectedTo -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#isConnectedTo">
+        <rdf:type rdf:resource="&owl;SymmetricProperty"/>
+        <rdfs:comment>ElementsTimelineEmbedded и Lead связаны симметрично.</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#belongToClass"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#hasClass"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.example.org/crm_detailed_ontology#Lead"/>
+                    <rdf:Description rdf:about="http://www.example.org/crm_detailed_ontology#ElementsTimelineEmbedded"/>
+                </owl:oneOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.example.org/crm_detailed_ontology#Lead"/>
+                    <rdf:Description rdf:about="http://www.example.org/crm_detailed_ontology#ElementsTimelineEmbedded"/>
+                </owl:oneOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#isItemOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#isItemOf">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>Item принадлежит одному Lead.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#belongToClass"/>
+        <owl:inverseOf rdf:resource="http://www.example.org/crm_detailed_ontology#hasItemFromLead"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#isParamsClassOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#isParamsClassOf">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>ParamsClass связан с множеством Lead (один-ко-многим).</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.example.org/crm_detailed_ontology#belongToClass"/>
+        <owl:inverseOf rdf:resource="http://www.example.org/crm_detailed_ontology#hasParamsClassFromLead"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#precedesStatus -->
+
+    <owl:ObjectProperty rdf:about="http://www.example.org/crm_detailed_ontology#precedesStatus">
+        <rdf:type rdf:resource="&owl;TransitiveProperty"/>
+        <rdfs:comment>Определяет последовательность статусов в воронке; транзитивное свойство.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Status"/>
+        <rdfs:range rdf:resource="http://www.example.org/crm_detailed_ontology#Status"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasAuthorName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasAuthorName">
+        <rdfs:comment>Имя автора элемента Item.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasCallResult -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasCallResult">
+        <rdfs:comment>Расшифровка статуса по результатам вызова, связанного с ParamsClass</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasCallStatus -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasCallStatus">
+        <rdfs:comment>Идентификатор статуса по результатам вызова, связанного с ParamsClass</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasCallText -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasCallText">
+        <rdfs:comment>Входящй/исходящий звонок, связанный с ParamsClass</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasCatalogID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasCatalogID">
+        <rdfs:comment>Идентификатор каталога, связанного с CustomField</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#CustomField"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasClosedAt -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasClosedAt">
+        <rdfs:comment>Дата закрытия лида.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:range rdf:resource="&xsd;dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasCode -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasCode">
+        <rdfs:comment>Код ObjectType</rdfs:comment>
+        <rdfs:comment>Код пользовательского поля (CustomField)</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#CustomField"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ObjectType"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasColor -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasColor">
+        <rdfs:comment>Цвет статуса</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Status"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasCompleteTill -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasCompleteTill">
+        <rdfs:comment>Срок выполнения для Item</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasCreatedAt -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasCreatedAt">
+        <rdfs:comment>Дата создания объекта.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Account"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Contact"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#CustomField"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ElementsTimeline"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ElementsTimelineEmbedded"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ElementsTimelineLinks"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#FilterPreset"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#LossReason"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ObjectType"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Pipeline"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Status"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#TaskResult"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#TypeElement"/>
+        <rdfs:range rdf:resource="&xsd;dateTime"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.example.org/crm_detailed_ontology#Lead"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasCreatedBy -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasCreatedBy">
+        <rdfs:comment>Идентификатор пользователя, создавшего элемент Item</rdfs:comment>
+        <rdfs:comment>Идентификатор пользователя, создавшего результат задачи</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#TaskResult"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasCurrency -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasCurrency">
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Account"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasCurrent -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasCurrent">
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ElementsTimelineLinks"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasData -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasData">
+        <rdfs:comment>Данные результата задачи в формате JSON</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#TaskResult"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasDateCreated -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasDateCreated">
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#TaskResult"/>
+        <rdfs:range rdf:resource="&xsd;dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasDateModified -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasDateModified">
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#TaskResult"/>
+        <rdfs:range rdf:resource="&xsd;dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasDuration -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasDuration">
+        <rdfs:comment>Длительность действия, связанного с ParamsClass</rdfs:comment>
+        <rdfs:comment>Длительность действия для элемента Items</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasElementId -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasElementId">
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#TaskResult"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasElementType -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasElementType">
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Contact"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#TaskResult"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasEnums -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasEnums">
+        <rdfs:comment>Перечисление значений для CustomField в Json формате</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#CustomField"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasFailed -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasFailed">
+        <rdfs:comment>Указывает, было ли действие элемента Item неудачным</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:range rdf:resource="&xsd;boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasFieldID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasFieldID">
+        <rdfs:comment>Идентификатор поля ParamsClass</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasFieldType -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasFieldType">
+        <rdfs:comment>Тип поля для ParamsClass</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasID">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>Уникальный идентификатор для каждого объекта (функциональное свойство).</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Account"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Contact"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#CustomField"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ElementsTimeline"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ElementsTimelineEmbedded"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ElementsTimelineLinks"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#FilterPreset"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#LossReason"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ObjectType"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Pipeline"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Status"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#TaskResult"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#TypeElement"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.example.org/crm_detailed_ontology#Account"/>
+                    <rdf:Description rdf:about="http://www.example.org/crm_detailed_ontology#Lead"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasLeadType -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasLeadType">
+        <rdfs:comment>Тип лида в ParamsClass</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasLinkData -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasLinkData">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>Уникальная ссылка Accounts</rdfs:comment>
+        <rdfs:comment>Уникальная ссылка ParamsClass</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Account"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasMainContactID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasMainContactID">
+        <rdfs:comment>Идентификатор главного контакта лида.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasModifiedBy -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasModifiedBy">
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#TaskResult"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasMsecCreatedAt -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasMsecCreatedAt">
+        <rdfs:comment>Время создания элемента Item в миллисекундах</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:range rdf:resource="&xsd;float"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasName">
+        <rdfs:comment>Атрибут имени для сущностей.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Account"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Contact"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#CustomField"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ElementsTimeline"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ElementsTimelineEmbedded"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ElementsTimelineLinks"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#FilterPreset"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#LossReason"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ObjectType"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Pipeline"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Status"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#TaskResult"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#TypeElement"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.example.org/crm_detailed_ontology#Account"/>
+                    <rdf:Description rdf:about="http://www.example.org/crm_detailed_ontology#Lead"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasNewEnumID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasNewEnumID">
+        <rdfs:comment>Идентификатор нового значения перечисления ParamsClass</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasNewValue -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasNewValue">
+        <rdfs:comment>Новое текстовое значение ParamsClass</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasNext -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasNext">
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ElementsTimelineLinks"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasNoteID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasNoteID">
+        <rdfs:comment>Идентификатор заметки, связанной с элементом Item</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasNoteType -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasNoteType">
+        <rdfs:comment>Тип заметки, связанной с элементом Item</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasOldEnumID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasOldEnumID">
+        <rdfs:comment>Идентификатор старого значения перечисления ParamsClass</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasOldValue -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasOldValue">
+        <rdfs:comment>Историческое текстовое значение ParamsClass</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasParams -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasParams">
+        <rdfs:comment>JSON-объект для хранения параметров Items</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasPhone -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasPhone">
+        <rdfs:comment>Номер телефона, связанный с ParamsClass</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasPrev -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasPrev">
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ElementsTimelineLinks"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasQuery -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasQuery">
+        <rdfs:comment>Запрос для предустановленного фильтра (FilterPreset)</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#FilterPreset"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasRawData -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasRawData">
+        <rdfs:comment>Исходные JSON-данные, связанные с сущностями.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Account"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Contact"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#CustomField"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ElementsTimeline"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ElementsTimelineEmbedded"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ElementsTimelineLinks"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#FilterPreset"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#LossReason"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ObjectType"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Pipeline"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Status"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#TaskResult"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#TypeElement"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.example.org/crm_detailed_ontology#Lead"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasResponsibleUserID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasResponsibleUserID">
+        <rdfs:comment>Идентификатор ответственного пользователя за элемент Item</rdfs:comment>
+        <rdfs:comment>Идентификатор ответственного пользователя за Contact.</rdfs:comment>
+        <rdfs:comment>Идентификатор ответственного пользователя за TaskResult.</rdfs:comment>
+        <rdfs:comment>Идентификатор ответственного пользователя за Lead.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Contact"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#TaskResult"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasSort -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasSort">
+        <rdfs:comment>Порядок сортировки (FilterPreset)</rdfs:comment>
+        <rdfs:comment>Порядок сортировки (Pipeline)</rdfs:comment>
+        <rdfs:comment>Порядок сортировки (Status)</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#FilterPreset"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Pipeline"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Status"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasSrc -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasSrc">
+        <rdfs:comment>Источник данных (от какого расширения) в ParamsClass</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasStatus -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasStatus">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment>Воронка содержит несколько статусов (многие-ко-многим).</rdfs:comment>
+        <rdfs:comment>Аккаунт связан с одним или несколькими статусами (многие-ко-многим).</rdfs:comment>
+        <rdfs:comment>Лид имеет текущий статус.</rdfs:comment>
+        <rdfs:comment>Статус элемента Item внутри класса ParamsClass</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasSubtypeID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasSubtypeID">
+        <rdfs:comment>Идентификатор подтипа для ParamsClass</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasSystemType -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasSystemType">
+        <rdfs:comment>Системный тип (FilterPreset)</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#FilterPreset"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasText -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasText">
+        <rdfs:comment>Текстовое описание параметра ParamsClass</rdfs:comment>
+        <rdfs:comment>Текстовое содержимое элемента Item</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasTimezone -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasTimezone">
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Account"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasType -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasType">
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#CustomField"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Status"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#TaskResult"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasUniq -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasUniq">
+        <rdfs:comment>Для хранения уникального идентификатора записи из расширения</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#ParamsClass"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasUniqueID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasUniqueID">
+        <rdfs:comment>UUID элемента Items</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#hasUpdatedBy -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#hasUpdatedBy">
+        <rdfs:comment>Идентификатор пользователя, который обновил лид.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#isArchive -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#isArchive">
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Pipeline"/>
+        <rdfs:range rdf:resource="&xsd;boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#isCompletable -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#isCompletable">
+        <rdfs:comment>Может ли элемент Item быть завершен</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:range rdf:resource="&xsd;boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#isDeletable -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#isDeletable">
+        <rdfs:comment>Может ли результат задачи быть удален</rdfs:comment>
+        <rdfs:comment>Может ли элемент Item быть удален</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#TaskResult"/>
+        <rdfs:range rdf:resource="&xsd;boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#isEditable -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#isEditable">
+        <rdfs:comment>Может ли результат задачи быть отредактирован</rdfs:comment>
+        <rdfs:comment>Может ли элемент Item быть отредактирован</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Status"/>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#TaskResult"/>
+        <rdfs:range rdf:resource="&xsd;boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#isMain -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#isMain">
+        <rdfs:comment>Основной ли Pipeline</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Pipeline"/>
+        <rdfs:range rdf:resource="&xsd;boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#isPinned -->
+
+    <owl:DatatypeProperty rdf:about="http://www.example.org/crm_detailed_ontology#isPinned">
+        <rdfs:comment>Указывает, закреплен ли элемент Item</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.example.org/crm_detailed_ontology#Item"/>
+        <rdfs:range rdf:resource="&xsd;boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#Account -->
+
+    <owl:Class rdf:about="http://www.example.org/crm_detailed_ontology#Account">
+        <rdfs:comment>Аккаунт, центральный узел, связывающий различные сущности в системе CRM.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#Contact -->
+
+    <owl:Class rdf:about="http://www.example.org/crm_detailed_ontology#Contact">
+        <rdfs:comment>Представляет контактное лицо, связанное с лидами.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#CustomField -->
+
+    <owl:Class rdf:about="http://www.example.org/crm_detailed_ontology#CustomField">
+        <rdfs:comment>Пользовательские поля, связанные с лидами и другими сущностями.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#ElementsTimeline -->
+
+    <owl:Class rdf:about="http://www.example.org/crm_detailed_ontology#ElementsTimeline">
+        <rdfs:comment>Представляет временную шкалу событий и изменений в сущностях CRM.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#ElementsTimelineEmbedded -->
+
+    <owl:Class rdf:about="http://www.example.org/crm_detailed_ontology#ElementsTimelineEmbedded">
+        <rdfs:comment>Представляет вложенные события внутри временной шкалы.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#ElementsTimelineLinks -->
+
+    <owl:Class rdf:about="http://www.example.org/crm_detailed_ontology#ElementsTimelineLinks">
+        <rdfs:comment>Представляет ссылки пагинации (prev, next) во временной шкале.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#FilterPreset -->
+
+    <owl:Class rdf:about="http://www.example.org/crm_detailed_ontology#FilterPreset">
+        <rdfs:comment>Представляет предустановленные фильтры, используемые для лидов.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#Item -->
+
+    <owl:Class rdf:about="http://www.example.org/crm_detailed_ontology#Item">
+        <rdfs:comment>Представляет элементы (задачи, заметки, события), связанные с лидами и другими сущностями.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#Lead -->
+
+    <owl:Class rdf:about="http://www.example.org/crm_detailed_ontology#Lead">
+        <rdfs:comment>Представляет потенциальную сделку или возможность в CRM.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#LossReason -->
+
+    <owl:Class rdf:about="http://www.example.org/crm_detailed_ontology#LossReason">
+        <rdfs:comment>Представляет причины, по которым лид был потерян.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#ObjectType -->
+
+    <owl:Class rdf:about="http://www.example.org/crm_detailed_ontology#ObjectType">
+        <rdfs:comment>Представляет тип объекта (Лид, Контакт, Элемент и т.д.) в CRM.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#ParamsClass -->
+
+    <owl:Class rdf:about="http://www.example.org/crm_detailed_ontology#ParamsClass">
+        <rdfs:comment>Представляет параметры событий, связанных с изменениями статусов, пайплайнов и других сущностей.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#Pipeline -->
+
+    <owl:Class rdf:about="http://www.example.org/crm_detailed_ontology#Pipeline">
+        <rdfs:comment>Представляет категорию воронки продаж в CRM.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#Status -->
+
+    <owl:Class rdf:about="http://www.example.org/crm_detailed_ontology#Status">
+        <rdfs:comment>Представляет этапы воронки продаж.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#TaskResult -->
+
+    <owl:Class rdf:about="http://www.example.org/crm_detailed_ontology#TaskResult">
+        <rdfs:comment>Представляет результат задачи, связанный с лидом.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#TypeElement -->
+
+    <owl:Class rdf:about="http://www.example.org/crm_detailed_ontology#TypeElement">
+        <rdfs:comment>Представляет типы элементов, связанные с лидами.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#ApplicationReceived -->
+
+    <owl:NamedIndividual rdf:about="http://www.example.org/crm_detailed_ontology#ApplicationReceived">
+        <rdf:type rdf:resource="http://www.example.org/crm_detailed_ontology#Status"/>
+        <hasName>Заявка получена</hasName>
+        <precedesStatus rdf:resource="http://www.example.org/crm_detailed_ontology#Qualified"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#ClosedStatus -->
+
+    <owl:NamedIndividual rdf:about="http://www.example.org/crm_detailed_ontology#ClosedStatus">
+        <rdf:type rdf:resource="http://www.example.org/crm_detailed_ontology#Status"/>
+        <hasID rdf:datatype="&xsd;integer">100</hasID>
+        <hasName>Сделка заключена</hasName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#ContactType -->
+
+    <owl:NamedIndividual rdf:about="http://www.example.org/crm_detailed_ontology#ContactType">
+        <rdf:type rdf:resource="http://www.example.org/crm_detailed_ontology#ObjectType"/>
+        <hasID rdf:datatype="&xsd;integer">701</hasID>
+        <hasName>Контакт</hasName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#ElementsTimelineEmbedded -->
+
+    <owl:NamedIndividual rdf:about="http://www.example.org/crm_detailed_ontology#ElementsTimelineEmbedded"/>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#ExampleAccount -->
+
+    <owl:NamedIndividual rdf:about="http://www.example.org/crm_detailed_ontology#ExampleAccount">
+        <rdf:type rdf:resource="http://www.example.org/crm_detailed_ontology#Account"/>
+        <hasID rdf:datatype="&xsd;integer">500</hasID>
+        <hasName>Пример компании</hasName>
+        <hasPipeline rdf:resource="http://www.example.org/crm_detailed_ontology#ExamplePipeline"/>
+        <hasEmbeddedTimeline rdf:resource="http://www.example.org/crm_detailed_ontology#ExampleTimelineEvent1"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#ExampleContact -->
+
+    <owl:NamedIndividual rdf:about="http://www.example.org/crm_detailed_ontology#ExampleContact">
+        <rdf:type rdf:resource="http://www.example.org/crm_detailed_ontology#Contact"/>
+        <hasID rdf:datatype="&xsd;integer">600</hasID>
+        <hasName>Иван Иванов</hasName>
+        <belongsToObjectType rdf:resource="http://www.example.org/crm_detailed_ontology#ContactType"/>
+        <isContactOfLead rdf:resource="http://www.example.org/crm_detailed_ontology#ExampleLead"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#ExampleLead -->
+
+    <owl:NamedIndividual rdf:about="http://www.example.org/crm_detailed_ontology#ExampleLead">
+        <rdf:type rdf:resource="http://www.example.org/crm_detailed_ontology#Lead"/>
+        <hasID rdf:datatype="&xsd;integer">1</hasID>
+        <hasName>Пример лида</hasName>
+        <hasStatus rdf:resource="http://www.example.org/crm_detailed_ontology#ClosedStatus"/>
+        <hasContact rdf:resource="http://www.example.org/crm_detailed_ontology#ExampleContact"/>
+        <hasPipeline rdf:resource="http://www.example.org/crm_detailed_ontology#ExamplePipeline"/>
+        <hasEmbeddedTimeline rdf:resource="http://www.example.org/crm_detailed_ontology#ExampleTimelineEvent1"/>
+        <belongsToObjectType rdf:resource="http://www.example.org/crm_detailed_ontology#LeadType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#ExamplePipeline -->
+
+    <owl:NamedIndividual rdf:about="http://www.example.org/crm_detailed_ontology#ExamplePipeline">
+        <rdf:type rdf:resource="http://www.example.org/crm_detailed_ontology#Pipeline"/>
+        <hasID rdf:datatype="&xsd;integer">10</hasID>
+        <hasName>Воронка продаж</hasName>
+        <hasStatus rdf:resource="http://www.example.org/crm_detailed_ontology#ApplicationReceived"/>
+        <hasStatus rdf:resource="http://www.example.org/crm_detailed_ontology#Qualified"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#ExampleTimeline -->
+
+    <owl:NamedIndividual rdf:about="http://www.example.org/crm_detailed_ontology#ExampleTimeline">
+        <rdf:type rdf:resource="http://www.example.org/crm_detailed_ontology#ElementsTimeline"/>
+        <hasID rdf:datatype="&xsd;integer">2000</hasID>
+        <hasEmbeddedElement rdf:resource="http://www.example.org/crm_detailed_ontology#ExampleTimelineEvent1"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#ExampleTimelineEvent1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.example.org/crm_detailed_ontology#ExampleTimelineEvent1">
+        <rdf:type rdf:resource="http://www.example.org/crm_detailed_ontology#ElementsTimelineEmbedded"/>
+        <hasID rdf:datatype="&xsd;integer">3000</hasID>
+        <belongsToAccount rdf:resource="http://www.example.org/crm_detailed_ontology#ExampleAccount"/>
+        <hasLead rdf:resource="http://www.example.org/crm_detailed_ontology#ExampleLead"/>
+        <hasTimeline rdf:resource="http://www.example.org/crm_detailed_ontology#ExampleTimeline"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#Lead -->
+
+    <owl:NamedIndividual rdf:about="http://www.example.org/crm_detailed_ontology#Lead"/>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#LeadType -->
+
+    <owl:NamedIndividual rdf:about="http://www.example.org/crm_detailed_ontology#LeadType">
+        <rdf:type rdf:resource="http://www.example.org/crm_detailed_ontology#ObjectType"/>
+        <hasID rdf:datatype="&xsd;integer">700</hasID>
+        <hasName>Лид</hasName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#ProposalSent -->
+
+    <owl:NamedIndividual rdf:about="http://www.example.org/crm_detailed_ontology#ProposalSent"/>
+    
+
+
+    <!-- http://www.example.org/crm_detailed_ontology#Qualified -->
+
+    <owl:NamedIndividual rdf:about="http://www.example.org/crm_detailed_ontology#Qualified">
+        <rdf:type rdf:resource="http://www.example.org/crm_detailed_ontology#Status"/>
+        <hasName>Квалифицирован</hasName>
+        <precedesStatus rdf:resource="http://www.example.org/crm_detailed_ontology#ProposalSent"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+
